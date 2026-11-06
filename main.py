@@ -17,6 +17,8 @@ from models.prestamo import Prestamo, EstadoPrestamo
 from routes import insumos, usuario, prestamo
 from seed_estados import cargar_datos_iniciales
 
+import time
+from fastapi import Request
 
 def cargar_usuario_admin():
     username = os.getenv("ADMIN_USERNAME", "admin")
@@ -66,6 +68,22 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(lifespan=lifespan)
+
+@app.middleware("http")
+async def medir_tiempo(request: Request, call_next):
+    inicio = time.perf_counter()
+
+    response = await call_next(request)
+
+    duracion = (time.perf_counter() - inicio) * 1000
+
+    print(
+        f"{request.method} {request.url.path} "
+        f"- Tiempo backend: {duracion:.2f} ms",
+        flush=True
+    )
+
+    return response
 
 app.add_middleware(
     CORSMiddleware,
