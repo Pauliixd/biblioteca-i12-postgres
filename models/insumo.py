@@ -43,7 +43,8 @@ Index(
     func.lower(func.trim(Insumo.__table__.c.nombre)),
     Insumo.__table__.c.numeracion,
     unique=True,
-    sqlite_where=Insumo.__table__.c.activo == True
+    sqlite_where=Insumo.__table__.c.activo.is_(True),
+    postgresql_where=Insumo.__table__.c.activo.is_(True)
 )
 
 class InsumoUpdate(SQLModel):
