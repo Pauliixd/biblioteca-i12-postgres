@@ -70,7 +70,7 @@ app = FastAPI(lifespan=lifespan)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "https://sistemabiblioteca-i12.netlify.app",
+        "https://biblio-i12-front-neon.netlify.app",
         "http://127.0.0.1:5500",
         "http://localhost:5500",
         "http://127.0.0.1:8000",
