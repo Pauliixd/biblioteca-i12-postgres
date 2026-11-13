@@ -44,9 +44,9 @@ def cargar_usuario_admin():
 
         administrador = Usuario(
             username=username,
-            email="admin@example.com",
+            email="adminDev@example.com",
             nombre="Administrador",
-            apellido="Demo",
+            apellido="Sistema",
             password_hashed=obtener_password_hash(password),
             disabled=False,
             id_rol=1
